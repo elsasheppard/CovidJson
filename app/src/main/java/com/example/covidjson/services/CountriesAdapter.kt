@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.covidjson.R
 import com.example.covidjson.models.MyCountry
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.country_item.view.*
 
 class CountriesAdapter(private val countriesList: List<MyCountry>) :RecyclerView.Adapter<CountriesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
+        // which layout are we using to display our items in the recycler view?
         val view  = LayoutInflater.from(parent.context).inflate(R.layout.country_item,parent,false)
         return ViewHolder(view)
     }
@@ -25,7 +27,7 @@ class CountriesAdapter(private val countriesList: List<MyCountry>) :RecyclerView
         return countriesList.size
     }
 
-
+    // finding out which item to diaplay from the list based on the position and calling the bind function
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Log.d("Response", "List Count :${countriesList.size} ")
 
@@ -35,17 +37,13 @@ class CountriesAdapter(private val countriesList: List<MyCountry>) :RecyclerView
     }
     class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView) {
 
-        // these might make errors later
-        // put blank as a resource input or whatever
-        var imageView = itemView.findViewById<ImageView>(R.id.ivFlag)
-        var tvTitle = itemView.findViewById<TextView>(R.id.tvTitle)
-        var tvCases = itemView.findViewById<TextView>(R.id.tvCases)
-        fun bind(country: MyCountry) {
 
+        // linking the individual object to the layout fields in our individual item view
+        fun bind(country: MyCountry) {
             val name ="Cases :${country.cases.toString()}"
-            tvTitle.text = country.country
-            tvCases.text = name
-            Picasso.get().load(country.countryInfo.flag).into(imageView)
+            itemView.tvTitle.text = country.country
+            itemView.tvCases.text = name
+            Picasso.get().load(country.countryInfo.flag).into(itemView.imageView)
         }
 
     }

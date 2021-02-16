@@ -49,5 +49,8 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Something went wrong $t", Toast.LENGTH_SHORT).show()
             }
         })
+
+        // any code we put here after the enqueue will be executed immediately after the requestCall
+        // is initiated, but not necessarily after we get a response
     }
 }
